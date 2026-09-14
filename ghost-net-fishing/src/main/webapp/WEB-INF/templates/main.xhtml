@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><ui:insert name="title">Ghost Net Fishing</ui:insert></title>
+    <h:outputStylesheet library="css" name="app.css" />
+</h:head>
+<h:body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <h:link outcome="/index" styleClass="brand">
+                <span class="brand-mark">GN</span>
+                <span>Ghost Net Fishing</span>
+            </h:link>
+            <nav aria-label="Hauptnavigation" class="main-nav">
+                <h:link value="Übersicht" outcome="/index" />
+                <h:link value="Netz melden" outcome="/report" />
+                <h:link value="Bergung übernehmen" outcome="/rescue" />
+                <h:link value="Geborgen melden" outcome="/recover" />
+                <h:link value="Verschollen melden" outcome="/lost" />
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        <h:messages styleClass="messages" />
+        <ui:insert name="content" />
+    </main>
+
+    <footer class="site-footer">1
+        <div class="container footer-inner">
+            <span>Ghost Net Fishing – Prototyp für die Bergung von Geisternetzen.</span>
+            <span>Demo-Daten können beispielhaft sein. Keine Garantie für aktuelle Standort- oder Bergungsinformationen.</span>
+        </div>
+    </footer>
+</h:body>
+</html>

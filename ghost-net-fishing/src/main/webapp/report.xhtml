@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Geisternetz melden</ui:define>
+    <ui:define name="content">
+        <section class="page-heading">
+            <p class="eyebrow">Meldung erfassen</p>
+            <h1>Neues Geisternetz melden</h1>
+            <p class="lead">Standort und geschätzte Größe eintragen. Die Meldung kann anonym erfolgen.</p>
+        </section>
+        <section class="form-card">
+            <h:form>
+                <div class="form-grid">
+                    <div class="field">
+                        <h:outputLabel for="lat" value="Breitengrad" />
+                        <h:inputText id="lat" value="#{ghostNetBean.newNet.latitude}" required="true" requiredMessage="Bitte Breitengrad angeben.">
+                            <f:validateDoubleRange minimum="-90" maximum="90" />
+                        </h:inputText>
+                        <h:message for="lat" styleClass="field-error" />
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="lon" value="Längengrad" />
+                        <h:inputText id="lon" value="#{ghostNetBean.newNet.longitude}" required="true" requiredMessage="Bitte Längengrad angeben.">
+                            <f:validateDoubleRange minimum="-180" maximum="180" />
+                        </h:inputText>
+                        <h:message for="lon" styleClass="field-error" />
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="size" value="Geschätzte Größe in m²" />
+                        <h:inputText id="size" value="#{ghostNetBean.newNet.estimatedSizeM2}" required="true" requiredMessage="Bitte Größe angeben.">
+                            <f:validateDoubleRange minimum="0.1" maximum="100000" />
+                        </h:inputText>
+                        <h:message for="size" styleClass="field-error" />
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="name" value="Name (optional)" />
+                        <h:inputText id="name" value="#{ghostNetBean.reporterName}" maxlength="100" />
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="phone" value="Telefonnummer (optional)" />
+                        <h:inputText id="phone" value="#{ghostNetBean.reporterPhone}" maxlength="30" />
+                    </div>
+                </div>
+                <p class="form-note">Wenn Name und Telefonnummer leer bleiben, wird die Meldung als anonym gespeichert.</p>
+                <h:commandButton value="Geisternetz melden" action="#{ghostNetBean.createReport}" styleClass="button primary" />
+            </h:form>
+        </section>
+    </ui:define>
+</ui:composition>

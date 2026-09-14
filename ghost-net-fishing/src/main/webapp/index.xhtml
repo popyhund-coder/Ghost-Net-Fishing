@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Übersicht – Ghost Net Fishing</ui:define>
+    <ui:define name="content">
+        <section class="intro">
+            <div>
+                <p class="eyebrow">Gemeinsam gegen Geisternetze</p>
+                <h1>Gemeldete Netze im Überblick</h1>
+                <p class="lead">Meldungen erfassen, Bergungen koordinieren und den Status eines Netzes nachvollziehbar dokumentieren.</p>
+            </div>
+            <div class="quick-actions">
+                <h:link value="+ Geisternetz melden" outcome="/report" styleClass="button primary" />
+                <h:link value="Bergung übernehmen" outcome="/rescue" styleClass="button secondary" />
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Datenübersicht</h2>
+                    <p class="muted">Aktueller Stand der im System erfassten Netze.</p>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <h:dataTable value="#{ghostNetBean.allNets}" var="net" styleClass="data-table" headerClass="table-head" rowClasses="table-row">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{net.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Standort</f:facet>
+                        #{net.latitude}, #{net.longitude}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Größe</f:facet>
+                        #{net.estimatedSizeM2} m²
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        <span class="status status-#{net.status.name().toLowerCase()}">#{net.status.label}</span>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bergung</f:facet>
+                        #{empty net.rescuer ? 'Noch nicht zugeordnet' : net.rescuer.name}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </section>
+    </ui:define>
+</ui:composition>

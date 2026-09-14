@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Verschollen melden</ui:define>
+    <ui:define name="content">
+        <section class="page-heading">
+            <p class="eyebrow">Fundstatus prüfen</p>
+            <h1>Geisternetz als verschollen melden</h1>
+            <p class="lead">Nur mit Name und Telefonnummer kann eine beliebige Person einen nicht auffindbaren Standort melden.</p>
+        </section>
+        <section class="form-card">
+            <h:form>
+                <div class="field">
+                    <h:outputLabel for="net" value="Geisternetz" />
+                    <h:selectOneMenu id="net" value="#{ghostNetBean.selectedNetId}" required="true">
+                        <f:selectItem itemLabel="Bitte auswählen" itemValue="" />
+                        <f:selectItems value="#{ghostNetBean.allNets}" var="net" itemValue="#{net.id}" itemLabel="Netz #{net.id} – #{net.latitude}, #{net.longitude} – #{net.status.label}" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-grid two">
+                    <div class="field">
+                        <h:outputLabel for="name" value="Name" />
+                        <h:inputText id="name" value="#{ghostNetBean.contactName}" maxlength="100" required="true" />
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="phone" value="Telefonnummer" />
+                        <h:inputText id="phone" value="#{ghostNetBean.contactPhone}" maxlength="30" required="true" />
+                    </div>
+                </div>
+                <h:commandButton value="Als verschollen melden" action="#{ghostNetBean.markLost}" styleClass="button secondary" />
+            </h:form>
+        </section>
+    </ui:define>
+</ui:composition>
